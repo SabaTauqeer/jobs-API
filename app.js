@@ -16,7 +16,7 @@ const authRouter = require("./routes/auth");
 const jobsRouter = require("./routes/jobs");
 // error handler
 const notFoundMiddleware = require("./middleware/not-found");
-const errorHandlerMiddleware = require("./middleware/error-handler");
+const errorHandler = require("./errors");
 
 app.set("trust proxy", 1);
 app.use(ratelimit({ windowMs: 15 * 601000, max: 100 }));
