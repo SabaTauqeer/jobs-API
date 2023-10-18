@@ -16,7 +16,8 @@ const getAllJobs = async (req, res) => {
     console.log(jobs);
     res.status(StatusCodes.OK).json({ jobs, count: jobs.length });
   } catch (error) {
-    throw new BadRequestError("bad request");
+    res.send(error);
+    throw error;
   }
 };
 
