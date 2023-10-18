@@ -5,6 +5,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
     message: err.msg || "something went wrong",
   };
+
   if (err.name === "CastError") {
     customError.message = `no item found with id: ${err.value}`;
     customError.statusCode = 404;
@@ -22,7 +23,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     )}`;
     customError.statusCode = 400;
   }
-  return res.status(customError.statusCode).json({ msg: customError.message });
+  return res.status(500).json({ err });
 };
 
 module.exports = errorHandlerMiddleware;
