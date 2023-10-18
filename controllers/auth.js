@@ -27,7 +27,7 @@ const login = async (req, res) => {
 
     res.status(StatusCodes.OK).json({ user: { user: user.getName() }, token });
   } catch (error) {
-    throw new BadRequestError("bad request ");
+    throw new BadRequestError("bad request");
   }
 };
 module.exports = { register, login };
