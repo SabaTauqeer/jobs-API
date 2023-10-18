@@ -1,16 +1,28 @@
 const User = require("../models/User");
 const { StatusCodes } = require("http-status-codes");
-const { BadRequestError, UnauthenticatedError } = require("../errors");
+const {
+  BadRequestError,
+  UnauthenticatedError,
+  CustomAPIError,
+} = require("../errors");
 
 const register = async (req, res) => {
-  const user = await User.create({ ...req.body });
-  // const token = user.createJWT();
+  try {
+    const { email, name, password } = req.body;
+    if (!email || !name || !password) {
+      throw new BadRequestError("please provide complete crednetials");
+    }
+    const user = await User.create({ ...req.body });
 
-  res.status(StatusCodes.CREATED).json({ user: user.getName() });
+    res.status(StatusCodes.CREATED).json({ user: user.getName() });
+  } catch (error) {
+    res.send({ error });
+  }
 };
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(email, password);
     if (!email || !password) {
       throw new BadRequestError("please provide email and password");
     }
@@ -27,7 +39,7 @@ const login = async (req, res) => {
 
     res.status(StatusCodes.OK).json({ user: { user: user.getName() }, token });
   } catch (error) {
-    throw new BadRequestError("bad request");
+    res.send({ error });
   }
 };
 module.exports = { register, login };

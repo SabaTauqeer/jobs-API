@@ -14,9 +14,6 @@ const authenticateUser = require("./middleware/authentication");
 //routers
 const authRouter = require("./routes/auth");
 const jobsRouter = require("./routes/jobs");
-// error handler
-const notFoundMiddleware = require("./middleware/not-found");
-const errorHandler = require("./errors");
 
 app.set("trust proxy", 1);
 app.use(ratelimit({ windowMs: 15 * 601000, max: 100 }));
@@ -30,7 +27,7 @@ app.use(xss());
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authenticateUser, jobsRouter);
 
-app.use(notFoundMiddleware);
+// app.use(notFoundMiddleware);
 // app.use(errorHandler);
 
 const port = process.env.PORT || 3000;
