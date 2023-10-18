@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",
-    "start": "node app.js"
+    "start": "pm2 start app.js --no-daemon"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +21,7 @@
     "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.2",
+    "pm2": "^5.3.0",
     "rate-limiter": "^0.2.0",
     "swagger-ui-express": "^4.1.6",
     "xss-clean": "^0.1.1",
