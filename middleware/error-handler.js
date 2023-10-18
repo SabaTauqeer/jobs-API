@@ -3,7 +3,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
   let customError = {
     //defualt values
     statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
-    message: err.msg || "something went wrong",
+    message: err,
   };
 
   if (err.name === "CastError") {
@@ -23,7 +23,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     )}`;
     customError.statusCode = 400;
   }
-  return res.status(500).json({ err });
+  return res.status(customError.statusCode).json({ response: customError.msg });
 };
 
 module.exports = errorHandlerMiddleware;
