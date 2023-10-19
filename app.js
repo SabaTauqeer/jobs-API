@@ -15,25 +15,13 @@ const authenticateUser = require("./middleware/authentication");
 //routers
 const authRouter = require("./routes/auth");
 const jobsRouter = require("./routes/jobs");
-const bodyParser = require("body-parser");
 
 app.set("trust proxy", 1);
 app.use(ratelimit({ windowMs: 15 * 601000, max: 100 }));
 app.use(express.json());
 app.use(helmet());
-const allowedOrigins = ["https://jobsapi-167a3a6149c8.herokuapp.com/api/v1"];
 
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(xss());
 
