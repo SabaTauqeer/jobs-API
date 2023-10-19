@@ -21,7 +21,7 @@ app.set("trust proxy", 1);
 app.use(ratelimit({ windowMs: 15 * 601000, max: 100 }));
 app.use(express.json());
 app.use(helmet());
-const allowedOrigins = ["https://jobsapi-167a3a6149c8.herokuapp.com/"];
+const allowedOrigins = ["https://jobsapi-167a3a6149c8.herokuapp.com/api/v1"];
 
 const corsOptions = {
   origin: (origin, callback) => {
