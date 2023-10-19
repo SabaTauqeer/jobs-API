@@ -5,7 +5,7 @@ const { BadRequestError, NotFoundError } = require("../errors");
 const getAllJobs = async (req, res) => {
   const jobs = await Job.find({ createdby: req.user.userId }).sort("createdAt");
   console.log(jobs);
-  res.status(StatusCodes.OK).json({ jobs, count: jobs.length });
+  res.status(StatusCodes.OK).json({ jobs, count: jobs.length, saba: "dpsjkl" });
 };
 
 const getJob = async (req, res) => {
