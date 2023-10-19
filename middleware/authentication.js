@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const { UnauthenticatedError } = require("./errors");
 const auth = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   console.log(authHeader);
@@ -14,6 +15,7 @@ const auth = async (req, res, next) => {
 
     next();
   } catch (error) {
+    res.send(error);
     throw new UnauthenticatedError("plaease provide credntials");
   }
 };
