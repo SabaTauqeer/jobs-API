@@ -9,7 +9,7 @@ const xss = require("xss-clean");
 const ratelimit = require("express-rate-limit");
 //connectDB
 const connnectDB = require("./db/connect");
-// const errorHandlerMiddleware = require("./middleware/errorhadler");
+const errorHandlerMiddleware = require("./middleware/errorhadler");
 const authenticateUser = require("./middleware/authentication");
 
 //routers
@@ -21,11 +21,13 @@ app.set("trust proxy", 1);
 app.use(ratelimit({ windowMs: 15 * 601000, max: 100 }));
 app.use(express.json());
 app.use(helmet());
-// app.use(cors());
+app.use(cors());
 app.use(xss());
 
 // routes
-
+app.get("/", (req, res) => {
+  res.send("hello");
+});
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authenticateUser, jobsRouter);
 
