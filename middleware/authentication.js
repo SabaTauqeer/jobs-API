@@ -6,7 +6,7 @@ const auth = async (req, res, next) => {
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     console.log(authHeader);
-    //   throw new UnauthenticatedError("please provide credentials");
+    throw new UnauthenticatedError("please provide credentials");
   }
   const token = authHeader.split(" ")[1];
   try {
