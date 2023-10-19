@@ -1,12 +1,12 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-const { UnauthenticatedError } = require("../errors");
+// const { UnauthenticatedError } = require("../errors");
 const auth = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     console.log(authHeader);
-    throw new UnauthenticatedError("please provide credentials");
+    // throw new UnauthenticatedError("please provide credentials");
   }
   const token = authHeader.split(" ")[1];
   try {
@@ -16,7 +16,8 @@ const auth = async (req, res, next) => {
 
     next();
   } catch (error) {
-    throw new UnauthenticatedError("plaease provide credntials");
+    res.send({ error });
+    // throw new UnauthenticatedError("plaease provide credntials");
   }
 };
 module.exports = auth;
