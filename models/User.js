@@ -36,7 +36,6 @@ UserSchema.methods.getName = function () {
   return this.name;
 };
 
-console.log(process.env.JWT_EXPIRES_IN);
 UserSchema.methods.createJWT = function () {
   return jwt.sign(
     { userId: this._id, name: this.name },
