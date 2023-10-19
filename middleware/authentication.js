@@ -16,7 +16,6 @@ const auth = async (req, res, next) => {
 
     next();
   } catch (error) {
-    res.send(error);
     throw new UnauthenticatedError("plaease provide credntials");
   }
 };
