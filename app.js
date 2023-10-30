@@ -1,5 +1,6 @@
 require("dotenv").config();
 require("express-async-errors");
+const cookiesParser = require("cookie-parser");
 const express = require("express");
 const app = express();
 //extra security packages
@@ -20,10 +21,9 @@ app.set("trust proxy", 1);
 app.use(ratelimit({ windowMs: 15 * 601000, max: 100 }));
 app.use(express.json());
 app.use(helmet());
-
 app.use(cors());
-
 app.use(xss());
+app.use(cookiesParser);
 
 // routes
 
