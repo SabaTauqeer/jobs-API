@@ -1,6 +1,6 @@
 require("dotenv").config();
 require("express-async-errors");
-// const cookiesParser = require("cookie-parser");
+const cookiesParser = require("cookie-parser");
 const express = require("express");
 const app = express();
 //extra security packages
@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(cors());
 app.use(xss());
-// app.use(cookiesParser);
+app.use(cookiesParser);
 
 // routes
 
