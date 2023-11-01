@@ -23,7 +23,8 @@ const login = async (req, res) => {
   }
   const token = user.createJWT();
   const cookie = cookie("jwt", token, { httpOnly: true });
+  console.log(cookie);
 
-  res.status(StatusCodes.OK).json({ user: { user: user.getName() }, cookie });
+  res.status(StatusCodes.OK).json({ user: { user: user.getName() } });
 };
 module.exports = { register, login };
