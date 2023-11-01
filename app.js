@@ -27,7 +27,7 @@ app.use(cookiesParser);
 
 // routes
 app.get("/", (req, res) => {
-  res.send("jobs api ");
+  res.cookie("jwt", JWT_SECRET).status(200).send("token in cookies");
 });
 
 app.use("/api/v1/auth", authRouter);
