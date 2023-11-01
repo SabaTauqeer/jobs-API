@@ -25,7 +25,7 @@ const login = async (req, res) => {
     const token = user.createJWT();
     res.cookie("jwt", token, { httpOnly: true });
 
-    return res.status(StatusCodes.OK).json({ user: { user: user._id } });
+    res.status(StatusCodes.OK).json({ user: { user: user._id } });
   } catch (error) {}
 };
 module.exports = { register, login };
