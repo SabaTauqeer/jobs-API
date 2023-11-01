@@ -8,24 +8,24 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
 
-    if (!email || !password) {
-      throw new BadRequestError("please provide email and password");
-    }
-    const user = await User.findOne({ email });
-    if (!user) {
-      throw new UnauthenticatedError("invalid credentials");
-    }
-    const isPassCorrect = await user.checkPassword(password);
-    if (!isPassCorrect) {
-      throw new UnauthenticatedError("invalid credentials");
-    }
-    const token = user.createJWT();
-    res.cookie("jwt", token, { httpOnly: true });
+  if (!email || !password) {
+    throw new BadRequestError("please provide email and password");
+  }
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new UnauthenticatedError("invalid credentials");
+  }
+  const isPassCorrect = await user.checkPassword(password);
+  if (!isPassCorrect) {
+    throw new UnauthenticatedError("invalid credentials");
+  }
+  const token = user.createJWT();
+  console.log(token);
+  // res.cookie("jwt", token, { httpOnly: true, maxAge: 3600, path: "/" });
+  // res.setHeader("Set-Cookie", [cookie]);
 
-    res.status(StatusCodes.OK).json({ user: { user: user._id } });
-  } catch (error) {}
+  res.status(StatusCodes.OK).json({ user: { user: user._id }, token });
 };
 module.exports = { register, login };
