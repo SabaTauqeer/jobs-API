@@ -22,9 +22,7 @@ const login = async (req, res) => {
     throw new UnauthenticatedError("invalid credentials");
   }
   const token = user.createJWT();
-  const cookie = cookie("jwt", token, { httpOnly: true });
-  console.log(cookie);
 
-  res.status(StatusCodes.OK).json({ user: { user: user.getName() } });
+  res.status(StatusCodes.OK).json({ user: { user: user.getName() }, token });
 };
 module.exports = { register, login };
