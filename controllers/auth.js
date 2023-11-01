@@ -25,7 +25,7 @@ const login = async (req, res) => {
   console.log(token);
   res.cookie("jwt", token, {
     maxAge: 3600,
-    path: "/api/v1/jobs",
+    domain: "https://jobsapi-167a3a6149c8.herokuapp.com/api/v1/jobs",
   });
 
   res.status(StatusCodes.OK).json({ user: { user: user._id }, token });
