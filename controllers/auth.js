@@ -22,11 +22,6 @@ const login = async (req, res) => {
     throw new UnauthenticatedError("invalid credentials");
   }
   const token = user.createJWT();
-  console.log(token);
-  res.cookie("jwt", token, {
-    maxAge: 3600,
-    domain: "https://jobsapi-167a3a6149c8.herokuapp.com/api/v1/jobs",
-  });
 
   res.status(StatusCodes.OK).json({ user: { user: user._id }, token });
 };
