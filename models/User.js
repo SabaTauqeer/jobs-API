@@ -37,13 +37,14 @@ UserSchema.methods.getName = function () {
 };
 
 UserSchema.methods.createJWT = function () {
-  return jwt.sign(
+  const token = jwt.sign(
     { userId: this._id, name: this.name },
     process.env.JWT_SECRET,
     {
       expiresIn: process.env.JWT_EXPIRES_IN,
     }
   );
+  return res.cookie("jwt", token);
 };
 UserSchema.methods.checkPassword = async function (userpass) {
   const isMatch = await bcrypt.compare(userpass, this.password);
