@@ -23,7 +23,11 @@ const login = async (req, res) => {
   }
   const token = user.createJWT();
   console.log(token);
-  res.cookie("jwt", token, { httpOnly: true, maxAge: 3600 });
+  res.cookie("jwt", token, {
+    httpOnly: true,
+    maxAge: 3600,
+    path: "/api/v1/jobs",
+  });
 
   res.status(StatusCodes.OK).json({ user: { user: user._id }, token });
 };
