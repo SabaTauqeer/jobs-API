@@ -1,6 +1,6 @@
 require("dotenv").config();
 require("express-async-errors");
-const cookiesParser = require("cookie-parser");
+
 const express = require("express");
 const app = express();
 //extra security packages
@@ -23,11 +23,10 @@ app.use(express.json());
 app.use(helmet());
 app.use(cors());
 app.use(xss());
-app.use(cookiesParser);
-
+s;
 // routes
 app.get("/", (req, res) => {
-  res.cookie("jwt", JWT_SECRET).status(200).send("token in cookies");
+  res.send("token in cookies");
 });
 
 app.use("/api/v1/auth", authRouter);
